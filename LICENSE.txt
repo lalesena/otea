@@ -1,0 +1,40 @@
+Otea
+Copyright (c) 2026 lalesena. Todos los derechos reservados.
+
+Este programa, su código (fuente o compilado), su diseño y sus textos son
+obra de su autor. No se concede ninguna licencia sobre ellos: queda prohibido
+copiarlos, modificarlos, distribuirlos, publicarlos, sublicenciarlos,
+venderlos o crear obras derivadas de ellos, en todo o en parte, sin el permiso
+previo y por escrito del autor.
+
+Solo se permite usar la aplicación web que publica el autor
+(https://lalesena.github.io/otea/) desde un navegador, tal cual, sin
+garantía de ningún tipo.
+
+Las versiones publicadas antes del 10 de octubre de 2026 incluido (hasta la
+revisión 026b32b) se distribuyeron con la licencia GNU AGPL-3.0-or-later; ese
+permiso se mantiene para esas versiones y no se extiende a las posteriores.
+
+Los componentes de terceros que incluye la aplicación conservan sus propias
+licencias: ver NOTICE.
+
+-------------------------------------------------------------------------------
+
+Otea
+Copyright (c) 2026 lalesena. All rights reserved.
+
+This program, its code (source or compiled), its design and its texts are the
+work of its author. No licence is granted: copying, modifying, distributing,
+publishing, sublicensing, selling or creating derivative works of them, in
+whole or in part, is forbidden without the author's prior written permission.
+
+You may only use the web application published by the author
+(https://lalesena.github.io/otea/) in a web browser, as is, without warranty
+of any kind.
+
+Versions published up to and including 10 October 2026 (up to revision
+026b32b) were distributed under the GNU AGPL-3.0-or-later; that permission
+remains for those versions and does not extend to later ones.
+
+Third-party components included in the application keep their own licences:
+see NOTICE.

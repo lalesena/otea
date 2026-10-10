@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- SPDX-License-Identifier: LicenseRef-Otea-Proprietary · Otea © 2026 lalesena. Todos los derechos reservados. -->
+  <rect width="512" height="512" rx="112" fill="#1F3445"/>
+  <g transform="translate(57.6 130.45) scale(6.2)" fill="none" stroke="#EEF1EA" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 20C15 6 49 6 59 20"/>
+    <path d="M5 20L16 27.5L24 21.5L33.5 31L43 23L50.5 27.5L59 20"/>
+  </g>
+  <circle cx="256" cy="238.95" r="44.64" fill="#FF5B1F"/>
+</svg>

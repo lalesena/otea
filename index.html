@@ -1,0 +1,212 @@
+<!doctype html>
+<!-- Otea © 2026 lalesena. Todos los derechos reservados. -->
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tiles.openfreemap.org https://www.ign.es https://s3.amazonaws.com; connect-src 'self' https://valhalla1.openstreetmap.de https://lalesena.github.io https://geocoding-api.open-meteo.com https://nominatim.openstreetmap.org https://tiles.openfreemap.org https://www.ign.es https://s3.amazonaws.com; font-src 'self'; worker-src 'self' blob:; child-src 'self' blob:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#1f3445">
+  <meta name="description" content="Planifica rutas en bici y mira el tiempo que te hará en el momento en que pasarás por cada punto: viento de cara o de cola, lluvia y temperatura, y la mejor hora para salir.">
+  <title>Otea</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="vendor/maplibre/maplibre-gl.css?v=bc6c66af94">
+  <link rel="stylesheet" href="styles.css?v=b75ee00529">
+  <link rel="stylesheet" href="map.css?v=a854633a6a">
+  <script type="module" src="app.js?v=e2da4d8947"></script>
+</head>
+<body>
+<div id="app" data-profile="off">
+  <aside id="panel" data-sheet="peek" data-state="start" data-view="main" aria-label="Otea">
+    <button id="grip" class="grip" type="button" data-i18n-aria="sheet.toggle"><span></span></button>
+
+    <div id="busy" class="busy" hidden><i></i></div>
+
+    <div id="panel-body" class="panel-body">
+      <header class="panel-head">
+        <div class="brand">
+          <svg class="logo" width="40" height="25" viewBox="0 0 64 40" fill="none" aria-hidden="true" focusable="false"><path d="M5 20C15 6 49 6 59 20" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><path d="M5 20l11 7.5 8-6 9.5 9.5 9.5-8 7.5 4.5 8.5-7.5" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="17.5" r="7.2" fill="#FF5B1F"/></svg>
+          <span class="wordmark">OTEA</span>
+        </div>
+        <div class="menu-wrap" data-nodrag>
+          <button id="btn-menu" class="icon-btn" type="button" aria-expanded="false" aria-controls="app-menu" data-i18n-aria="app.menu" data-i18n-title="app.menu"><span data-icon="menu"></span></button>
+          <div id="am-scrim" class="am-scrim" hidden></div>
+          <div id="app-menu" class="app-menu" hidden>
+            <div class="am-group" role="group" aria-labelledby="am-lang-l"><span id="am-lang-l" class="am-label" data-i18n="app.lang"></span><div id="am-lang" class="seg" role="radiogroup" aria-labelledby="am-lang-l"></div></div>
+            <div class="am-group" role="group" aria-labelledby="am-units-l"><span id="am-units-l" class="am-label" data-i18n="app.units"></span><div id="am-units" class="seg" role="radiogroup" aria-labelledby="am-units-l"></div></div>
+            <div class="am-group" role="group" aria-labelledby="am-theme-l"><span id="am-theme-l" class="am-label" data-i18n="app.theme"></span><div id="am-theme" class="seg" role="radiogroup" aria-labelledby="am-theme-l"></div></div>
+            <div class="am-sep"></div>
+            <button id="am-mine" class="am-item" type="button"><span data-icon="save" data-icon-size="18"></span><span data-i18n="app.mine"></span></button>
+            <button id="am-install" class="am-item" type="button" hidden><span data-icon="import" data-icon-size="18"></span><span data-i18n="app.install"></span></button>
+            <p id="am-install-hint" class="am-hint" hidden></p>
+            <button id="am-about" class="am-item" type="button"><span data-icon="info" data-icon-size="18"></span><span data-i18n="app.about"></span></button>
+          </div>
+        </div>
+      </header>
+      <div id="view-main" class="view-main">
+        <section id="start" class="start" aria-labelledby="start-h">
+          <h1 id="start-h" class="vh" tabindex="-1" data-i18n="start.title"></h1>
+          <div class="rf-field start-field">
+            <span class="start-ic" data-icon="search" data-icon-size="22"></span>
+            <input id="start-input" class="rf-input big" type="text" autocomplete="off" spellcheck="false" enterkeyhint="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="start-results" data-i18n-ph="start.ask" data-i18n-aria="start.label">
+            <ul id="start-results" class="rf-results" role="listbox" hidden></ul>
+          </div>
+          <div class="start-btns">
+            <button id="start-here" class="btn outline" type="button"><span data-icon="locate" data-icon-size="18"></span><span data-i18n="start.here"></span></button>
+            <button id="start-import" class="btn outline" type="button"><span data-icon="import" data-icon-size="18"></span><span data-i18n="start.import"></span></button>
+          </div>
+          <p class="start-tap" data-i18n="start.tap"></p>
+        </section>
+
+        <div id="sheet-top" class="sheet-top">
+          <section id="route-card" class="route-card">
+            <h1 id="route-title" class="route-title" tabindex="-1"></h1>
+            <p id="route-when" class="route-when"></p>
+            <div id="route-figs" class="figs"></div>
+          </section>
+          <ul id="wx-chips" class="wx-chips"></ul>
+          <div id="wx-note" class="wx-note"></div>
+          <div id="m-profile" class="m-profile">
+            <div id="pf-mini" class="pf-box mini" tabindex="0" role="slider"><canvas></canvas><div class="pf-cursor"></div><div class="pf-dot"></div><div class="pf-bubble" aria-hidden="true"></div></div>
+            <div class="m-cap-row"><p id="m-caption" class="m-caption"></p><button id="m-all" class="link-btn" type="button" hidden data-i18n="sec.all"></button></div>
+            <div id="m-sel" class="m-sel" hidden>
+              <div class="m-sel-tx"><span id="m-sel-cat"></span><div class="tx"><b id="m-sel-name"></b><span id="m-sel-sum"></span></div></div>
+              <button id="m-sel-open" class="btn primary sm" type="button" data-i18n="sec.open"></button>
+              <button id="m-sel-clear" class="icon-btn small" type="button" data-i18n-aria="sec.clear" data-i18n-title="sec.clear"><span data-icon="close" data-icon-size="18"></span></button>
+            </div>
+          </div>
+          <div class="m-actions">
+            <button id="m-depart" class="btn outline" type="button"><span data-icon="clock" data-icon-size="18"></span><span id="m-depart-t"></span></button>
+            <button class="btn primary" type="button" data-act="share"><span data-icon="share" data-icon-size="18"></span><span data-i18n="act.share"></span></button>
+          </div>
+        </div>
+
+        <div id="sheet-more" class="sheet-more">
+          <section id="climbs" class="block climbs" data-i18n-aria="cl.title" hidden></section>
+          <p id="wx-status" class="wx-status"></p>
+
+          <div class="actions">
+            <button class="btn primary grow only-desk" type="button" data-act="share"><span data-icon="share" data-icon-size="18"></span><span data-i18n="act.share"></span></button>
+            <button class="btn outline" type="button" data-act="gpx"><span data-i18n="act.gpx"></span></button>
+            <button class="btn outline icon" type="button" data-act="save" data-i18n-aria="act.save" data-i18n-title="act.save"><span data-icon="save" data-icon-size="18"></span></button>
+          </div>
+          <p id="share-note" class="hint"></p>
+
+          <hr class="rule">
+
+          <section id="route-section" class="block" aria-labelledby="h-route">
+            <div class="block-head">
+              <h2 id="h-route" class="eyebrow" data-i18n="route.title"></h2>
+              <div class="links">
+                <button id="act-reverse" class="link-btn" type="button" data-i18n="route.reverse"></button>
+                <button id="act-close" class="link-btn" type="button" data-i18n="route.close"></button>
+                <button id="act-outback" class="link-btn" type="button" data-i18n="route.outback"></button>
+              </div>
+            </div>
+            <ol id="rf" class="rf"></ol>
+            <div class="rf-foot">
+              <button id="act-addstop" class="link-btn strong" type="button"><span data-icon="plus" data-icon-size="18"></span><span data-i18n="route.addStop"></span></button>
+              <span class="grow"></span>
+              <button id="undo" class="icon-btn small" type="button" data-i18n-aria="wp.undo" data-i18n-title="wp.undo"><span data-icon="undo" data-icon-size="18"></span></button>
+              <button id="clear" class="icon-btn small" type="button" data-i18n-aria="route.clear" data-i18n-title="route.clear"><span data-icon="trash" data-icon-size="18"></span></button>
+            </div>
+            <p id="wps-hint" class="hint"></p>
+          </section>
+
+          <section id="depart-section" class="block" aria-labelledby="h-depart">
+            <div class="block-head"><h2 id="h-depart" class="eyebrow" data-i18n="when.title"></h2></div>
+            <div class="quick" role="group" data-i18n-aria="when.quick">
+              <button class="chip" type="button" data-quick="now" data-i18n="when.now"></button>
+              <button class="chip" type="button" data-quick="1h" data-i18n="when.in1h"></button>
+              <button class="chip" type="button" data-quick="tomorrow" data-i18n="when.tomorrow9"></button>
+              <span class="chip-wrap">
+                <button id="depart-chip" class="chip on" type="button" aria-haspopup="dialog"></button>
+                <input id="depart" class="vh" type="datetime-local" tabindex="-1" aria-hidden="true">
+              </span>
+            </div>
+            <button id="best-run" class="btn outline wide sm" type="button" data-i18n-title="best.intro"><span data-icon="clock" data-icon-size="18"></span><span data-i18n="best.run"></span></button>
+            <p id="best-state" class="hint" role="status"></p>
+            <div id="best-wrap" class="best-wrap" hidden>
+              <div id="best-strip" class="strip" role="listbox" aria-orientation="horizontal" data-i18n-aria="best.strip"></div>
+              <p id="best-summary" class="best-summary" aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section id="prefs" class="block prefs" aria-labelledby="prefs-l">
+            <button id="prefs-toggle" class="prefs-btn" type="button" aria-expanded="false" aria-controls="prefs-body">
+              <span class="prefs-txt"><span id="prefs-l" class="eyebrow" data-i18n="prefs.title"></span><span id="prefs-summary" class="prefs-sum"></span></span>
+              <span class="prefs-chev" data-icon="chevron" data-icon-size="18"></span>
+            </button>
+            <div id="prefs-body" class="prefs-body" hidden>
+              <div class="pref"><span id="pf-bike-l" class="lbl" data-i18n="prof.title"></span><div id="profiles" class="seg wrap" role="radiogroup" aria-labelledby="pf-bike-l"></div></div>
+              <label class="slider" for="avoid-hills"><span data-i18n="prof.hills"></span><output id="o-hills" for="avoid-hills"></output><input id="avoid-hills" type="range" min="0" max="100" step="5"></label>
+              <label class="slider" for="avoid-traffic"><span data-i18n="prof.traffic"></span><output id="o-traffic" for="avoid-traffic"></output><input id="avoid-traffic" type="range" min="0" max="100" step="5"></label>
+              <label class="pref speed"><span class="lbl" data-i18n="when.speed"></span><span class="with-unit"><input id="speed" type="number" min="5" max="60" step="1" inputmode="numeric"><em id="speed-unit"></em></span></label>
+              <label class="check"><input id="day-only" type="checkbox"><span data-i18n="best.dayOnly"></span></label>
+              <div class="pref"><span id="pf-model-l" class="lbl" data-i18n="when.model"></span><div id="models" class="seg wrap" role="radiogroup" aria-labelledby="pf-model-l"></div></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <section id="view-climb" class="view-climb" hidden></section>
+
+      <section id="view-mine" class="view-mine" aria-labelledby="mine-h" hidden>
+        <div class="view-head">
+          <button id="mine-back" class="btn ghost" type="button"><span data-icon="back" data-icon-size="18"></span><span data-i18n="mine.back"></span></button>
+          <h2 id="mine-h" class="view-title" data-i18n="mine.title"></h2>
+        </div>
+        <button id="import-gpx" class="btn outline wide" type="button"><span data-icon="import" data-icon-size="18"></span><span data-i18n="mine.import"></span></button>
+        <ul id="saved" class="saved"></ul>
+        <p id="saved-empty" class="hint" data-i18n="mine.empty"></p>
+      </section>
+    </div>
+
+    <footer class="credit">
+      <a href="LICENSE.txt" target="_blank" rel="noopener">Otea © lalesena</a>
+    </footer>
+  </aside>
+
+  <div id="modebar" class="modebar" role="radiogroup" data-i18n-aria="mode.aria" hidden></div>
+  <div id="maplegend" class="maplegend" hidden></div>
+
+  <section id="profile" class="profile-card" data-i18n-aria="prof.aria" hidden>
+    <div class="pf-head">
+      <span class="eyebrow" data-i18n="prof.eyebrow"></span>
+      <span id="pf-climb" class="pf-climb"></span>
+      <div id="pf-selbar" class="pf-selbar" hidden>
+        <span id="pf-sel-cat"></span><b id="pf-sel-name"></b><span id="pf-sel-sum" class="pf-sel-sum"></span>
+        <button id="pf-sel-open" class="btn primary sm" type="button" data-i18n="sec.open"></button>
+        <button id="pf-sel-zoom" class="btn outline sm" type="button"><span data-icon="search" data-icon-size="18"></span><span data-i18n="sec.zoom"></span></button>
+        <button id="pf-sel-clear" class="icon-btn small" type="button" data-i18n-aria="sec.clear" data-i18n-title="sec.clear"><span data-icon="close" data-icon-size="18"></span></button>
+      </div>
+      <button id="pf-all" class="link-btn" type="button" hidden data-i18n="sec.all"></button>
+      <span id="pf-totals" class="pf-totals"></span>
+    </div>
+    <div id="pf-desk" class="pf-box" tabindex="0" role="slider"><canvas></canvas><div class="pf-cursor"></div><div class="pf-dot"></div><div class="pf-bubble" aria-hidden="true"></div></div>
+    <div id="pf-legend" class="pf-legend"></div>
+    <div id="sec-desk" class="sec-host" hidden></div>
+  </section>
+
+  <div id="map" role="application" data-i18n-aria="map.aria"></div>
+  <div id="sr" class="vh" role="status" aria-live="polite"></div>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+</div>
+
+<dialog id="about" aria-labelledby="about-title">
+  <form method="dialog" class="about">
+    <header>
+      <img src="icons/icon.svg" alt="" width="44" height="44">
+      <div><h2 id="about-title">Otea</h2><p><a href="LICENSE.txt" target="_blank" rel="noopener">Otea © lalesena</a> · <span id="about-version"></span></p></div>
+    </header>
+    <div id="about-body"></div>
+    <div class="about-foot"><button class="btn primary" value="close" data-i18n="about.close"></button></div>
+  </form>
+</dialog>
+
+<input id="gpx-file" type="file" accept=".gpx,application/gpx+xml,text/xml,application/xml" hidden>
+</body>
+</html>

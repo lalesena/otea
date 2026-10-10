@@ -1,0 +1,35 @@
+Otea
+Copyright (c) 2026 lalesena. Todos los derechos reservados. Ver LICENSE.
+https://lalesena.github.io/otea/
+
+Otea usa los ficheros de previsión que publica Chubasco
+(https://github.com/lalesena/chubasco), del mismo autor, y comparte parte de
+su código.
+
+Componentes de terceros incluidos en la aplicación, con sus licencias:
+
+- MapLibre GL JS (https://github.com/maplibre/maplibre-gl-js)
+  Copyright (c) 2023, MapLibre contributors. BSD-3-Clause.
+  Texto completo en vendor/maplibre/LICENSE.txt.
+
+- maplibre-contour (https://github.com/onthegomap/maplibre-contour)
+  Copyright (c) 2023, Michael Barry and maplibre-contour contributors.
+  BSD-3-Clause. Texto completo en vendor/maplibre-contour/LICENSE.txt.
+
+- Barlow y Barlow Condensed (https://github.com/jpt/barlow)
+  Copyright 2017 The Barlow Project Authors. SIL Open Font License 1.1.
+  Texto completo en fonts/OFL.txt.
+
+Datos de terceros que la aplicación muestra (cada uno con su crédito en el
+mapa y en «Acerca de»): OpenStreetMap (ODbL), OpenFreeMap / OpenMapTiles,
+Terrain Tiles de AWS Open Data, Valhalla (servidor de FOSSGIS), Nominatim,
+Open-Meteo, ECMWF, DWD y NOAA (vía Chubasco) e Instituto Geográfico Nacional
+de España (CC BY 4.0).
+
+-------------------------------------------------------------------------------
+
+Third-party components included in the application keep their own licences:
+MapLibre GL JS (BSD-3-Clause, vendor/maplibre/LICENSE.txt), maplibre-contour
+(BSD-3-Clause, vendor/maplibre-contour/LICENSE.txt) and the Barlow fonts
+(SIL Open Font License 1.1, fonts/OFL.txt). Everything else is
+Copyright (c) 2026 lalesena, all rights reserved (see LICENSE).
