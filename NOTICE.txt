@@ -23,8 +23,8 @@ Componentes de terceros incluidos en la aplicación, con sus licencias:
 Datos de terceros que la aplicación muestra (cada uno con su crédito en el
 mapa y en «Acerca de»): OpenStreetMap (ODbL), OpenFreeMap / OpenMapTiles,
 Terrain Tiles de AWS Open Data, Valhalla (servidor de FOSSGIS), Nominatim,
-Open-Meteo, ECMWF, DWD y NOAA (vía Chubasco) e Instituto Geográfico Nacional
-de España (CC BY 4.0).
+Open-Meteo, ECMWF, DWD, Météo-France y NOAA (vía Chubasco) e Instituto
+Geográfico Nacional de España (CC BY 4.0).
 
 -------------------------------------------------------------------------------
 
