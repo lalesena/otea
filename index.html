@@ -14,9 +14,9 @@
   <link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="stylesheet" href="vendor/maplibre/maplibre-gl.css?v=bc6c66af94">
-  <link rel="stylesheet" href="styles.css?v=008da1a73d">
+  <link rel="stylesheet" href="styles.css?v=7290823f66">
   <link rel="stylesheet" href="map.css?v=a854633a6a">
-  <script type="module" src="app.js?v=18de20b0cc"></script>
+  <script type="module" src="app.js?v=e117711fd7"></script>
 </head>
 <body>
 <div id="app" data-profile="off">
@@ -118,14 +118,17 @@
 
           <section id="depart-section" class="block" aria-labelledby="h-depart">
             <div class="block-head"><h2 id="h-depart" class="eyebrow" data-i18n="when.title"></h2></div>
+            <div class="days-row">
+              <div id="days" class="days" role="radiogroup" data-i18n-aria="when.day"></div>
+              <span class="chip-wrap">
+                <button id="depart-cal" class="day other" type="button" aria-haspopup="dialog"><span data-icon="calendar" data-icon-size="20"></span><b id="depart-cal-t" hidden></b></button>
+                <input id="depart-date" type="date" tabindex="-1" aria-hidden="true">
+              </span>
+            </div>
             <div class="quick" role="group" data-i18n-aria="when.quick">
               <button class="chip" type="button" data-quick="now" data-i18n="when.now"></button>
               <button class="chip" type="button" data-quick="1h" data-i18n="when.in1h"></button>
-              <button class="chip" type="button" data-quick="tomorrow" data-i18n="when.tomorrow9"></button>
-              <span class="chip-wrap">
-                <button id="depart-chip" class="chip on" type="button" aria-haspopup="dialog"></button>
-                <input id="depart" class="vh" type="datetime-local" tabindex="-1" aria-hidden="true">
-              </span>
+              <label class="chip hour-pick"><span data-icon="clock" data-icon-size="18"></span><select id="depart-hour" data-i18n-aria="when.hour"></select><span class="hp-caret" data-icon="chevron" data-icon-size="16"></span></label>
             </div>
             <button id="best-run" class="btn outline wide sm" type="button" data-i18n-title="best.intro"><span data-icon="clock" data-icon-size="18"></span><span data-i18n="best.run"></span></button>
             <p id="best-state" class="hint" role="status"></p>
