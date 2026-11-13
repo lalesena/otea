@@ -16,6 +16,9 @@ Componentes de terceros incluidos en la aplicación, con sus licencias:
   Copyright (c) 2023, Michael Barry and maplibre-contour contributors.
   BSD-3-Clause. Texto completo en vendor/maplibre-contour/LICENSE.txt.
 
+- tz-lookup (https://github.com/photostructure/tz-lookup), la zona horaria de un punto.
+  Dedicado al dominio público (CC0-1.0). Texto completo en vendor/tz-lookup/LICENSE.txt.
+
 - Barlow y Barlow Condensed (https://github.com/jpt/barlow)
   Copyright 2017 The Barlow Project Authors. SIL Open Font License 1.1.
   Texto completo en fonts/OFL.txt.
@@ -30,6 +33,7 @@ Geográfico Nacional de España (CC BY 4.0).
 
 Third-party components included in the application keep their own licences:
 MapLibre GL JS (BSD-3-Clause, vendor/maplibre/LICENSE.txt), maplibre-contour
-(BSD-3-Clause, vendor/maplibre-contour/LICENSE.txt) and the Barlow fonts
+(BSD-3-Clause, vendor/maplibre-contour/LICENSE.txt), tz-lookup (CC0-1.0,
+vendor/tz-lookup/LICENSE.txt) and the Barlow fonts
 (SIL Open Font License 1.1, fonts/OFL.txt). Everything else is
 Copyright (c) 2026 lalesena, all rights reserved (see LICENSE).

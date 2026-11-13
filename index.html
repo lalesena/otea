@@ -26,9 +26,9 @@
   <link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="stylesheet" href="vendor/maplibre/maplibre-gl.css?v=bc6c66af94">
-  <link rel="stylesheet" href="styles.css?v=90abe1c50d">
+  <link rel="stylesheet" href="styles.css?v=ee9a84a80f">
   <link rel="stylesheet" href="map.css?v=a854633a6a">
-  <script type="module" src="app.js?v=9097aa4bf8"></script>
+  <script type="module" src="app.js?v=861244cc25"></script>
 </head>
 <body>
 <div id="app" data-profile="off">
@@ -177,6 +177,11 @@
         <button id="import-gpx" class="btn outline wide" type="button"><span data-icon="import" data-icon-size="18"></span><span data-i18n="mine.import"></span></button>
         <ul id="saved" class="saved"></ul>
         <p id="saved-empty" class="hint" data-i18n="mine.empty"></p>
+        <div class="backup" role="group" aria-labelledby="backup-l">
+          <span id="backup-l" class="backup-l" data-i18n="mine.backup"></span>
+          <button id="backup-save" class="btn outline" type="button" data-i18n="mine.backupSave"></button>
+          <button id="backup-load" class="btn outline" type="button" data-i18n="mine.backupLoad"></button>
+        </div>
       </section>
     </div>
 
@@ -223,5 +228,6 @@
 </dialog>
 
 <input id="gpx-file" type="file" accept=".gpx,application/gpx+xml,text/xml,application/xml" hidden>
+<input id="backup-file" type="file" accept=".json,application/json" hidden>
 </body>
 </html>
